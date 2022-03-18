@@ -1,0 +1,6 @@
+-Q theories EquivalenceNotCongruence
+-arg -w -arg -local-declaration
+
+theories/Parser.v
+theories/Number.v
+theories/Core.v
