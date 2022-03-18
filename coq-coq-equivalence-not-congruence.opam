@@ -13,9 +13,10 @@ license: "BSD-3-Clause"
 
 synopsis: "Coq proof of an equivalence relation that is not congruent on the Imp language."
 description: """
-This projects contains a Coq proof of an equivalence relation that is not congruent
-on the Imp langauge from the Program Equivalence (Equiv) chapter of Programming
-Language Foundations, which is the second book of Software Foundations."""
+This projects contains a Coq proof of an equivalence relation on the Imp
+language that is not congruent. This answers a question from the Program
+Equivalence (Equiv) chapter of Programming Language Foundations, which is the
+second book of Software Foundations."""
 
 build: [make "-j%{jobs}%"]
 install: [make "install"]

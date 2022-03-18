@@ -20,9 +20,10 @@ header-includes:
 
 Welcome to the Equivalence Not Congruence for Imp project website!
 
-This projects contains a Coq proof of an equivalence relation that is not congruent
-on the Imp langauge from the Program Equivalence (Equiv) chapter of Programming
-Language Foundations, which is the second book of Software Foundations.
+This projects contains a Coq proof of an equivalence relation on the Imp
+language that is not congruent. This answers a question from the Program
+Equivalence (Equiv) chapter of Programming Language Foundations, which is the
+second book of Software Foundations.
 
 This is an open source project, licensed under the BSD 3-Clause "New" or "Revised" License.
 
