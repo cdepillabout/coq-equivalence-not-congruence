@@ -1,5 +1,5 @@
 -Q theories EquivalenceNotCongruence
--arg -w -arg -local-declaration
+-arg -w -arg -notation-overridden
 
 theories/Parser.v
 theories/Number.v
