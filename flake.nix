@@ -13,7 +13,7 @@
             dontUnpack = true;
             nativeBuildInputs = [
               self.coq_8_12
-              self.mustashe-go # for regenerating files fro meta.yml
+              self.mustache-go # for regenerating files fro meta.yml
             ];
             installPhase = "touch $out";
           };
