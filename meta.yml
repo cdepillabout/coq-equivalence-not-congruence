@@ -1,0 +1,39 @@
+---
+fullname: Equivalence Not Congruence for Imp
+shortname: coq-equivalence-not-congruence
+organization: cdepillabout
+community: false
+action: true
+nix: true
+coqdoc: true
+
+synopsis: Coq proof of an equivalence relation that is not congruent on the Imp language.
+
+description: |-
+  This projects contains a Coq proof of an equivalence relation that is not congruent
+  on the Imp langauge from the Program Equivalence (Equiv) chapter of Programming
+  Language Foundations, which is the second book of Software Foundations.
+
+authors:
+- name: Dennis Gosnell
+  initial: true
+
+license:
+  fullname: 'BSD 3-Clause "New" or "Revised" License'
+  identifier: BSD-3-Clause
+
+supported_coq_versions:
+  text: 8.12 or later
+  opam: '{ >= "8.12" }'
+
+tested_coq_opam_versions:
+- version: '8.12'
+
+tested_coq_nix_versions:
+- coq_version: '8.12'
+
+documentation: |-
+  ## Documentation
+
+---
+

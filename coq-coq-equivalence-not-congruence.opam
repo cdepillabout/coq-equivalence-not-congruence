@@ -1,0 +1,31 @@
+# This file was generated from `meta.yml`, please do not edit manually.
+# Follow the instructions on https://github.com/coq-community/templates to regenerate.
+
+opam-version: "2.0"
+maintainer: "palmskog@gmail.com"
+version: "dev"
+
+homepage: "https://github.com/cdepillabout/coq-equivalence-not-congruence"
+dev-repo: "git+https://github.com/cdepillabout/coq-equivalence-not-congruence.git"
+bug-reports: "https://github.com/cdepillabout/coq-equivalence-not-congruence/issues"
+doc: "https://cdepillabout.github.io/coq-equivalence-not-congruence/"
+license: "BSD-3-Clause"
+
+synopsis: "Coq proof of an equivalence relation that is not congruent on the Imp language."
+description: """
+This projects contains a Coq proof of an equivalence relation that is not congruent
+on the Imp langauge from the Program Equivalence (Equiv) chapter of Programming
+Language Foundations, which is the second book of Software Foundations."""
+
+build: [make "-j%{jobs}%"]
+install: [make "install"]
+depends: [
+  "coq" { >= "8.12" }
+]
+
+tags: [
+  "logpath:"
+]
+authors: [
+  "Dennis Gosnell"
+]
