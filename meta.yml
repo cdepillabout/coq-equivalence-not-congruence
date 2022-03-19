@@ -34,10 +34,16 @@ tested_coq_nix_versions:
 - coq_version: '8.12'
 
 documentation: |-
-  ## Building
+  ## Documentation
+
+  ### Building
 
   You can build by running `make`.  If you're using Nix, you can get into
   a shell with Coq available by running `nix develop`.
+
+  After building, you can open up any of the files in
+  [`theories/`](./theories/) in `coqide` order to
+  work through it.
 
 ---
 
