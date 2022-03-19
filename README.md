@@ -87,3 +87,33 @@ $ /some/path/to/coq-community/templates/generate.sh
 ```
 
 ### Overview
+
+The [Program Equivalence (Equiv)](https://softwarefoundations.cis.upenn.edu/plf-current/Equiv.html)
+chapter of
+[Programming Language Foundations](https://softwarefoundations.cis.upenn.edu/plf-current/index.html)
+has a question like the following:
+
+> We've shown that the `cequiv` relation is both an equivalence and
+> a congruence on commands.  Can you think of a relation on commands
+> that is an equivalence but _not_ a congruence?
+
+There is an
+[answer to this question on on the Computer Science StackExchange](https://cs.stackexchange.com/a/98873/130503):
+
+> Let `x`, `y` be two fixed distinct variable names.
+>
+> Call `P` and `Q` equivalent iff `Q` is obtained from `P` by optionally
+> swapping the variable names `x` and `y`. That is, either `Q = P` or
+> `Q = P{x/y,y/x}` where the latter uses simultaneous substitution.
+>
+> It is an equivalence. Reflexivity follows by construction. For symmetry,
+> `P == Q` swaps if `Q == P` swaps (where `==` is the equivalence relation).
+> For transitivity, we consider the four
+> cases: in the swap-swap case we get the same program back.
+>
+> It is not a congruence since `(x := x + 1) == (y := y + 1)` and
+> `(x := 0) == (x := 0)`, but `(x := 0; x := x + 1) =/= (x := 0; y := y + 1)`
+
+The [`theories/RenameVars.v`](./theories/RenameVars.v) file has a formalization of this equivalence
+relation on the Imp language, as well as a proof that there is no congruence
+in this case.
