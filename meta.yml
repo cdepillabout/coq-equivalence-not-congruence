@@ -79,7 +79,7 @@ documentation: |-
   > that is an equivalence but _not_ a congruence?
 
   There is an
-  [answer to this question on on the Computer Science StackExchange](https://cs.stackexchange.com/a/98873/130503):
+  [answer to this question on the Computer Science StackExchange](https://cs.stackexchange.com/a/98873/130503):
 
   > Let `x`, `y` be two fixed distinct variable names.
   >
