@@ -252,5 +252,3 @@ Proof.
   specialize (H _ _ _ _ H0 H1). clear H0 H1. inversion H; subst.
   unfold cequiv_with_swap in H0. destruct H0. destruct H0. unfold var_equiv_with_swap in H0. simpl in H0. destruct H0.
   Qed.  
-
-End EquivWithSwap.
