@@ -78,6 +78,8 @@ Notation "x = y"  := (BEq x y) (in custom com at level 70, no associativity).
 Notation "x && y" := (BAnd x y) (in custom com at level 80, left associativity).
 Notation "'~' b"  := (BNot b) (in custom com at level 75, right associativity).
   
+Open Scope com_scope.
+  
 Inductive com : Type :=
   | CSkip
   | CAsgn (x : string) (a : aexp)
@@ -85,3 +87,21 @@ Inductive com : Type :=
   | CIf (b : bexp) (c1 c2 : com)
   (* | CWhile (b : bexp) (c : com) *)
   .
+  
+Notation "'skip'"  :=
+         CSkip (in custom com at level 0) : com_scope.
+Notation "x := y"  :=
+         (CAsgn x y)
+            (in custom com at level 0, x constr at level 0,
+             y at level 85, no associativity) : com_scope.
+Notation "x ; y" :=
+         (CSeq x y)
+           (in custom com at level 90, right associativity) : com_scope.
+Notation "'if' x 'then' y 'else' z 'end'" :=
+         (CIf x y z)
+           (in custom com at level 89, x at level 99,
+            y at level 99, z at level 99) : com_scope.
+(* Notation "'while' x 'do' y 'end'" :=
+         (CWhile x y)
+            (in custom com at level 89, x at level 99, y at level 99) : com_scope.
+*)
