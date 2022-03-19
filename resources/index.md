@@ -20,10 +20,14 @@ header-includes:
 
 Welcome to the Equivalence Not Congruence for Imp project website!
 
-This projects contains a Coq proof of an equivalence relation on the Imp
-language that is not congruent. This answers a question from the Program
-Equivalence (Equiv) chapter of Programming Language Foundations, which is the
-second book of Software Foundations.
+This project contains a Coq proof of an equivalence relation on the Imp
+language that is not congruent. This answers a question from the
+[Program Equivalence (Equiv)](https://softwarefoundations.cis.upenn.edu/plf-current/Equiv.html)
+chapter of
+[Programming Language Foundations](https://softwarefoundations.cis.upenn.edu/plf-current/index.html), which is the
+second book of [Software Foundations](https://softwarefoundations.cis.upenn.edu/).
+This proof is suggested in
+this [answer on the Computer Science StackExchange](https://cs.stackexchange.com/a/98873/130503).
 
 This is an open source project, licensed under the BSD 3-Clause "New" or "Revised" License.
 

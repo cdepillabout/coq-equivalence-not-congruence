@@ -19,10 +19,14 @@ Follow the instructions on https://github.com/coq-community/templates to regener
 [coqdoc-link]: https://cdepillabout.github.io/coq-equivalence-not-congruence
 
 
-This projects contains a Coq proof of an equivalence relation on the Imp
-language that is not congruent. This answers a question from the Program
-Equivalence (Equiv) chapter of Programming Language Foundations, which is the
-second book of Software Foundations.
+This project contains a Coq proof of an equivalence relation on the Imp
+language that is not congruent. This answers a question from the
+[Program Equivalence (Equiv)](https://softwarefoundations.cis.upenn.edu/plf-current/Equiv.html)
+chapter of
+[Programming Language Foundations](https://softwarefoundations.cis.upenn.edu/plf-current/index.html), which is the
+second book of [Software Foundations](https://softwarefoundations.cis.upenn.edu/).
+This proof is suggested in
+this [answer on the Computer Science StackExchange](https://cs.stackexchange.com/a/98873/130503).
 
 ## Meta
 
@@ -54,3 +58,32 @@ make install
 
 
 ## Documentation
+
+### Building
+
+If you're using Nix, you can get into a shell with Coq available by running
+`nix develop`:
+
+```console
+$ nix develop
+```
+
+You can build all the Coq files in this repo with `make`:
+
+```console
+$ make
+```
+
+After building, you can open up any of the files in
+[`theories/`](./theories/) in `coqide` in order to work through the proofs.
+
+You can regenerate the files in this repo (like `README.md`) from the
+[`meta.yml`](./meta.yml) file by cloning
+[`coq-community/templates`](https://github.com/coq-community/templates) and
+running `generate.sh`:
+
+```console
+$ /some/path/to/coq-community/templates/generate.sh
+```
+
+### Overview
