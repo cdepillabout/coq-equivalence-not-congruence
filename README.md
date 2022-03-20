@@ -86,6 +86,12 @@ running `generate.sh`:
 $ /some/path/to/coq-community/templates/generate.sh
 ```
 
+You can also generate HTML documentation with `coqdoc`:
+
+```console
+$ make html
+```
+
 ### Overview
 
 The [Program Equivalence (Equiv)](https://softwarefoundations.cis.upenn.edu/plf-current/Equiv.html)
@@ -98,7 +104,7 @@ has a question like the following:
 > that is an equivalence but _not_ a congruence?
 
 There is an
-[answer to this question on on the Computer Science StackExchange](https://cs.stackexchange.com/a/98873/130503):
+[answer to this question on the Computer Science StackExchange](https://cs.stackexchange.com/a/98873/130503):
 
 > Let `x`, `y` be two fixed distinct variable names.
 >
@@ -114,6 +120,22 @@ There is an
 > It is not a congruence since `(x := x + 1) == (y := y + 1)` and
 > `(x := 0) == (x := 0)`, but `(x := 0; x := x + 1) =/= (x := 0; y := y + 1)`
 
-The [`theories/RenameVars.v`](./theories/RenameVars.v) file has a formalization of this equivalence
-relation on the Imp language, as well as a proof that there is no congruence
-in this case.
+The [`theories/RenameVars.v`](./theories/RenameVars.v) file has a
+formalization of this equivalence relation on the Imp language, as well as a
+proof that there is no congruence in this case.
+
+### Other approaches
+
+This repo contains other examples of equivalence relations that are not
+congruences:
+
+- [`theories/CountUniqVars.v`](./theories/CountUniqVars.v)
+
+    This file contains an example of an equivalence relation where
+    two Imp programs are considered equivalent if they have the
+    same number of unique assignments for a set of variables.
+    For instance, `(X := X + 1; X := 200)` is equivalent to
+    `(Y := 3)` (since they both assign to one unique variable).
+
+    This file proves this is an equivalence relation, and shows
+    that it is not a congruence.
