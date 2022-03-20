@@ -67,6 +67,12 @@ documentation: |-
   $ /some/path/to/coq-community/templates/generate.sh
   ```
 
+  You can also generate HTML documentation with `coqdoc`:
+
+  ```console
+  $ make html
+  ```
+
   ### Overview
 
   The [Program Equivalence (Equiv)](https://softwarefoundations.cis.upenn.edu/plf-current/Equiv.html)

@@ -1,4 +1,9 @@
-
+(** This file is a proof of an equivalence relation on [com] that
+    is an equivalent relation but not congruent. 
+    
+    In this file, [cequiv] represents an equivalence relation on [com].
+    At the end of the file, [no_CSeq_congruence] shows that this
+    [cequiv] is not congruent. *)
 
 From Coq Require Import Strings.String.
 From EquivalenceNotCongruence Require Export Imp.
