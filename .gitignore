@@ -34,3 +34,6 @@ nra.cache
 Makefile.coq*
 *~
 *.conf
+
+# HTML documentation
+/html/
