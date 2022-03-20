@@ -1,5 +1,6 @@
 -Q theories EquivalenceNotCongruence
 -arg -w -arg -notation-overridden
 
-theories/RenameVars.v
+theories/CountUniqVars.v
 theories/Imp.v
+theories/RenameVars.v
