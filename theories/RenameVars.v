@@ -10,6 +10,8 @@
 From Coq Require Import Strings.String.
 From EquivalenceNotCongruence Require Export Imp.
 
+(** * [var_equiv_with_swap] *)
+
 (** [xOrYOrOther] is a simple inductive type used in [var_equiv_with_swap] and
     [var_equiv_with_swap_sym] to make the proofs easier.  It is used along with
     [make_x_or_y_or_other] to determine whether a string is ["X"], ["Y"], or
@@ -95,7 +97,9 @@ Proof.
   simpl; auto; try destruct H12; try destruct H23. auto.
   Qed.
 
-(** This is similar to [var_equiv_with_swap], but lifted to [aexp]. 
+(** * [aequiv_with_swap]
+
+    This is similar to [var_equiv_with_swap], but lifted to [aexp]. 
     Examples follow, as well as proofs of symmetry and transitivity. *)
 
 Fixpoint aequiv_with_swap (a1 a2 : aexp) : Prop :=
@@ -149,7 +153,9 @@ Proof.
     now subst.
   Qed.
 
-(** Similar to [aequiv_with_swap], but for [bexp]. *)
+(** * [bequiv_with_swap]
+
+    Similar to [aequiv_with_swap], but for [bexp]. *)
 
 Fixpoint bequiv_with_swap (b1 b2 : bexp) : Prop :=
   match (b1,b2) with
@@ -189,7 +195,9 @@ Proof.
     now subst.
   Qed.
 
-(** Similar to [aequiv_with_swap], but for [com]. *)
+(** * [cequiv_with_swap]
+
+    Similar to [aequiv_with_swap], but for [com]. *)
 
 Fixpoint cequiv_with_swap (c1 c2 : com) : Prop :=
   match (c1, c2) with
@@ -240,13 +248,15 @@ Proof.
     apply bequiv_with_swap_trans_is_same with b0; assumption.
   Qed.
 
-(** [cequiv] is the equivalence relation between two [com]s.
+(** * Equivalence Relation on [com]: [cequiv]
+
+    [cequiv] is the equivalence relation between two [com]s.
 
     It says that:
     
     - in the case of [CEquivRefl], two [com] are equal
     - in the case of [CEquivSwap], two [com] are related under [cequiv_with_swap]
-      (so where all ["X"] and ["Y"] have been swapped in the second [com]. *)
+      (where all ["X"] and ["Y"] have been swapped in the second [com]). *)
 
 Inductive cequiv : com -> com -> Prop :=
   | CEquivRefl : forall c, cequiv c c
@@ -286,7 +296,9 @@ Proof.
     apply cequiv_with_swap_trans_is_same with c2; assumption. 
   Qed.
 
-(** This is the proof that this file has been working to.  This says that
+(** * Proof of no congruence
+
+    This is the proof that this file has been working to.  This says that
     given that the [com] [c1] and [c1'] are equivalent, and [c2] and [c2']
     are equivalent, we can't prove that [c1; c2] is equivalent to 
     [c1'; c2'].  This means that [cequiv] is not congruent. 
