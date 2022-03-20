@@ -1,12 +1,19 @@
 (** This file is a proof of an equivalence relation on [com] that
-    is an equivalent relation but not congruent. 
+    is not congruent. 
     
     In this file, [cequiv] represents an equivalence relation on [com].
-    At the end of the file, [no_CSeq_congruence] shows that this
-    [cequiv] is not congruent. *)
+    At the end of the file, [no_CSeq_congruence] shows that [cequiv]
+    is not congruent. 
+    
+    See the [README.md] file for an overview of this problem. *)
 
 From Coq Require Import Strings.String.
 From EquivalenceNotCongruence Require Export Imp.
+
+(** [xOrYOrOther] is a simple inductive type used in [var_equiv_with_swap] and
+    [var_equiv_with_swap_sym] to make the proofs easier.  It is used along with
+    [make_x_or_y_or_other] to determine whether a string is ["X"], ["Y"], or
+    something else. *)
 
 Inductive xOrYOrOther : string -> Type :=
   | IsX : xOrYOrOther "X"
@@ -20,6 +27,17 @@ Definition make_x_or_y_or_other (x : string): xOrYOrOther x :=
   | "Y"%string => IsY
   | n => IsOther n
   end. 
+
+(** Our equivalence relation [cequiv] determines if two [com] are equal,
+    where one [com] potentially has all uses of the ["X"] variable replaced
+    by ["Y"], and vice-versa.
+    
+    [var_equiv_with_swap] is at the heart of this.  It is a [Prop] that holds
+    in the following cases:
+    
+    - First argument is ["X"] and second argument is ["Y"]
+    - First argument is ["Y"] and second argument is ["X"]
+    - Both arguements are neither ["X"] nor ["Y"] *)
 
 Definition var_equiv_with_swap (s1 s2 : string) : Prop :=
   match make_x_or_y_or_other s1 with
@@ -40,6 +58,8 @@ Definition var_equiv_with_swap (s1 s2 : string) : Prop :=
       end
   end.
   
+(** Examples of [var_equiv_with_swap]. *)
+  
 Example var_equiv_example1 : var_equiv_with_swap "X" "Y".
 Proof. reflexivity. Qed.
 Example var_equiv_example2 : var_equiv_with_swap "Y" "X".
@@ -53,7 +73,10 @@ Proof. intros. unfold var_equiv_with_swap in *. simpl in *. auto. Qed.
 Example var_equiv_example6 : var_equiv_with_swap "Y" "G" -> False.
 Proof. intros. unfold var_equiv_with_swap in *. simpl in *. auto. Qed.
 
-Theorem var_equiv_with_swap_sym : forall s1 s2, var_equiv_with_swap s1 s2 -> var_equiv_with_swap s2 s1.
+(** Proving symmetry and transitivity for [var_equiv_with_swap]. *)
+
+Theorem var_equiv_with_swap_sym :
+  forall s1 s2, var_equiv_with_swap s1 s2 -> var_equiv_with_swap s2 s1.
 Proof.
   unfold var_equiv_with_swap. intros s1 s2 H.
   destruct (make_x_or_y_or_other s1) eqn:E;
@@ -71,6 +94,9 @@ Proof.
   destruct (make_x_or_y_or_other s3) eqn:G;
   simpl; auto; try destruct H12; try destruct H23. auto.
   Qed.
+
+(** This is similar to [var_equiv_with_swap], but lifted to [aexp]. 
+    Examples follow, as well as proofs of symmetry and transitivity. *)
 
 Fixpoint aequiv_with_swap (a1 a2 : aexp) : Prop :=
   match (a1,a2) with
@@ -123,6 +149,8 @@ Proof.
     now subst.
   Qed.
 
+(** Similar to [aequiv_with_swap], but for [bexp]. *)
+
 Fixpoint bequiv_with_swap (b1 b2 : bexp) : Prop :=
   match (b1,b2) with
   | (<{ true }>, <{ true }>) => True
@@ -160,6 +188,8 @@ Proof.
     specialize (IHb1_2 _ _ H0 H2).
     now subst.
   Qed.
+
+(** Similar to [aequiv_with_swap], but for [com]. *)
 
 Fixpoint cequiv_with_swap (c1 c2 : com) : Prop :=
   match (c1, c2) with
@@ -210,6 +240,14 @@ Proof.
     apply bequiv_with_swap_trans_is_same with b0; assumption.
   Qed.
 
+(** [cequiv] is the equivalence relation between two [com]s.
+
+    It says that:
+    
+    - in the case of [CEquivRefl], two [com] are equal
+    - in the case of [CEquivSwap], two [com] are related under [cequiv_with_swap]
+      (so where all ["X"] and ["Y"] have been swapped in the second [com]. *)
+
 Inductive cequiv : com -> com -> Prop :=
   | CEquivRefl : forall c, cequiv c c
   | CEquivSwap : forall c1 c2, cequiv_with_swap c1 c2 -> cequiv c1 c2
@@ -232,6 +270,8 @@ Proof.
   simpl in H0. destruct H0. destruct H0. unfold var_equiv_with_swap in H0. simpl in H0. destruct H0.
 Qed.
 
+(** Proof of reflexivity, symmetry, and transitivity for [cequiv]. *)
+
 Lemma refl_cequiv : forall (c : com), cequiv c c.
 Proof. constructor. Qed.
 
@@ -246,7 +286,15 @@ Proof.
     apply cequiv_with_swap_trans_is_same with c2; assumption. 
   Qed.
 
-(* x:=x+1≡y:=y+1 but (x:=0;x:=x+1)≢(x:=0;y:=y+1) *)
+(** This is the proof that this file has been working to.  This says that
+    given that the [com] [c1] and [c1'] are equivalent, and [c2] and [c2']
+    are equivalent, we can't prove that [c1; c2] is equivalent to 
+    [c1'; c2'].  This means that [cequiv] is not congruent. 
+    
+    This proof uses the example that [X := 0] is equivalent with
+    [X := 0] trivially, and [X := X + 1] is equivalent with
+    [Y := Y + 1] by replacing [X] with [Y].  But
+    [X := 0; X := X + 1] is not equivalent with [X := 0; Y := Y + 1]. *)
  
 Theorem no_CSeq_congruence : 
   ~ (forall c1 c1' c2 c2',
